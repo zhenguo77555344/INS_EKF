@@ -1,4 +1,45 @@
-# INS_EKF
+# How Kalman filter works
+
+##1. Some words in the beginning
+I would like to summarize one document about the Kalman filter,because what it does is realy amazing.Only few software engineers seem to know about it,and many of them consider it as a module can be copied from others project or some of them take it as complex math related tool.Both of the above situation made me sad,because it is such a general and powerful tool for combining information in the presence of uncertainty, such as sensor fusion field.
+
+## 2. What Kalman filter is
+Any dynamic system,which has uncertain information can be made an educated guess about how the system is going to do in the following time step by Kalman filter or derivation version of Kalman filter,such as EKF/UKF.If you could understand the basic Kalman filter's idear,it will be easy to learn other derivation version.
+
+Kalman filters are ideal for systems which are continuously changing. They have the advantage that they are light on memory (they don’t need to keep any history other than the previous state), and they are very fast, making them well suited for real time problems and embedded systems.
+
+The math for implementing the Kalman filter appears pretty scary and opaque in most places you find on website such as google. That’s a bad state of affairs, because the Kalman filter is actually super simple and easy to understand if you look at it in the right way. Thus it makes a great article topic, and I will attempt to illuminate it with lots of clear, pretty pictures and colors. The prerequisites are simple; all you need is a basic understanding of probability and matrices.
+
+I’ll start with a loose example of the kind of thing a Kalman filter can solve.
+
+## 3. What can we do using Kalman filter
+Let’s make a toy example: You’ve built a little robot that can wander around in the woods, and the robot needs to know exactly where it is so that it can navigate.
+![Bilby Stampede](https://www.bzarg.com/wp-content/uploads/2015/08/robot_forest-300x160.png)
+We’ll say our robot has a state xk, which is just a position and a velocity:
+    
+   xk=(p⃗ ,v⃗ )
+Note that the state is just a list of numbers about the underlying configuration of your system; it could be anything. In our example it’s position and velocity, but it could be data about the amount of fluid in a tank, the temperature of a car engine, the position of a user’s finger on a touchpad, or any number of things you need to keep track of.
+
+Our robot also has a GPS sensor, which is accurate to about 10 meters, which is good, but it needs to know its location more precisely than 10 meters. There are lots of gullies and cliffs in these woods, and if the robot is wrong by more than a few feet, it could fall off a cliff. So GPS by itself is not good enough
+
+![Bilby Stampede](https://www.bzarg.com/wp-content/uploads/2015/08/robot_ohnoes.png)
+
+We might also know something about how the robot moves: It knows the commands sent to the wheel motors, and its knows that if it’s headed in one direction and nothing interferes, at the next instant it will likely be further along that same direction. But of course it doesn’t know everything about its motion: It might be buffeted by the wind, the wheels might slip a little bit, or roll over bumpy terrain; so the amount the wheels have turned might not exactly represent how far the robot has actually traveled, and the prediction won’t be perfect.
+
+The GPS sensor tells us something about the state, but only indirectly, and with some uncertainty or inaccuracy. Our prediction tells us something about how the robot is moving, but only indirectly, and with some uncertainty or inaccuracy.
+
+But if we use all the information available to us, can we get a better answer than either estimate would give us by itself? Of course the answer is yes, and that’s what a Kalman filter is for.
+
+
+
+
+
+
+
+
+
+
+## Kalman filter instance: GNSS/INS fusion
 
 
 Program reading from log files implementing an extended Kalman filter for the inertial navigation.
