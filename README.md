@@ -1,6 +1,6 @@
 # How Kalman filter works
 
-##1. Some words in the beginning
+## 1. Some words in the beginning
 I would like to summarize one document about the Kalman filter,because what it does is realy amazing.Only few software engineers seem to know about it,and many of them consider it as a module can be copied from others project or some of them take it as complex math related tool.Both of the above situation made me sad,because it is such a general and powerful tool for combining information in the presence of uncertainty, such as sensor fusion field.
 
 ## 2. What Kalman filter is
