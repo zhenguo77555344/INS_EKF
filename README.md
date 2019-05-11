@@ -23,7 +23,7 @@ Note that the state is just a list of numbers about the underlying configuration
 
 Our robot also has a GPS sensor, which is accurate to about 10 meters, which is good, but it needs to know its location more precisely than 10 meters. There are lots of gullies and cliffs in these woods, and if the robot is wrong by more than a few feet, it could fall off a cliff. So GPS by itself is not good enough
 
-<img src="https://www.bzarg.com/wp-content/uploads/2015/08/robot_ohnoes.png"align="center" width="300" height="160"/>
+<img src="https://www.bzarg.com/wp-content/uploads/2015/08/robot_ohnoes.png"  width="300" height="160" align="center"/>
 
 We might also know something about how the robot moves: It knows the commands sent to the wheel motors, and its knows that if it’s headed in one direction and nothing interferes, at the next instant it will likely be further along that same direction. But of course it doesn’t know everything about its motion: It might be buffeted by the wind, the wheels might slip a little bit, or roll over bumpy terrain; so the amount the wheels have turned might not exactly represent how far the robot has actually traveled, and the prediction won’t be perfect.
 
@@ -35,7 +35,7 @@ But if we use all the information available to us, can we get a better answer th
 
 Let us look at the landscape we are trying to interpret.We will continue with the simple state having only position and velocity.
 We don't know what the actual position and velocity are;there are a whole range of possible combinations of position and velocity that might be true,but some of them are more likely than others.
-<img src="https://www.bzarg.com/wp-content/uploads/2015/08/gauss_0.png" align="center" width="300",height="160"/>
+<img src="https://www.bzarg.com/wp-content/uploads/2015/08/gauss_0.png"align="center" width="300",height="160"/>
 
 The Kalman filter assumes that both position and velocity are random and Gauusian distributed.Each variable has a mean value μ, which is the center of the random distribution (and its most likely state), and a variance σ2, which is the uncertainty
 
