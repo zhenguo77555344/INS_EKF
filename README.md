@@ -14,15 +14,16 @@ I’ll start with a loose example of the kind of thing a Kalman filter can solve
 
 ## 3. What can we do using Kalman filter
 Let’s make a toy example: You’ve built a little robot that can wander around in the woods, and the robot needs to know exactly where it is so that it can navigate.
-![Bilby Stampede](https://www.bzarg.com/wp-content/uploads/2015/08/robot_forest-300x160.png)
+
+<img src="https://www.bzarg.com/wp-content/uploads/2015/08/robot_forest-300x160.png" width="300" height="160" align="center"/>
+
 We’ll say our robot has a state xk, which is just a position and a velocity:
-    
-   xk=(p⃗ ,v⃗ )
+    xk=(p⃗ ,v⃗ )
 Note that the state is just a list of numbers about the underlying configuration of your system; it could be anything. In our example it’s position and velocity, but it could be data about the amount of fluid in a tank, the temperature of a car engine, the position of a user’s finger on a touchpad, or any number of things you need to keep track of.
 
 Our robot also has a GPS sensor, which is accurate to about 10 meters, which is good, but it needs to know its location more precisely than 10 meters. There are lots of gullies and cliffs in these woods, and if the robot is wrong by more than a few feet, it could fall off a cliff. So GPS by itself is not good enough
 
-![Bilby Stampede](https://www.bzarg.com/wp-content/uploads/2015/08/robot_ohnoes.png)
+<img src="https://www.bzarg.com/wp-content/uploads/2015/08/robot_ohnoes.png"align="center" width="300" height="160">
 
 We might also know something about how the robot moves: It knows the commands sent to the wheel motors, and its knows that if it’s headed in one direction and nothing interferes, at the next instant it will likely be further along that same direction. But of course it doesn’t know everything about its motion: It might be buffeted by the wind, the wheels might slip a little bit, or roll over bumpy terrain; so the amount the wheels have turned might not exactly represent how far the robot has actually traveled, and the prediction won’t be perfect.
 
@@ -34,26 +35,30 @@ But if we use all the information available to us, can we get a better answer th
 
 Let us look at the landscape we are trying to interpret.We will continue with the simple state having only position and velocity.
 We don't know what the actual position and velocity are;there are a whole range of possible combinations of position and velocity that might be true,but some of them are more likely than others.
-![Bilby Stampede](https://www.bzarg.com/wp-content/uploads/2015/08/gauss_0.png)
+<img src="https://www.bzarg.com/wp-content/uploads/2015/08/gauss_0.png" align="center" width="300",height="160">
 
 The Kalman filter assumes that both position and velocity are random and Gauusian distributed.Each variable has a mean value μ, which is the center of the random distribution (and its most likely state), and a variance σ2, which is the uncertainty
-![Bilby Stampede](https://www.bzarg.com/wp-content/uploads/2015/08/gauss_1.png)
+
+<img src="https://www.bzarg.com/wp-content/uploads/2015/08/gauss_1.png" align="center" width="300",height="160">
+
 In the above picture, position and velocity are uncorrelated, which means that the state of one variable tells you nothing about what the other might be.
 
 The example below shows something more interesting: Position and velocity are correlated. The likelihood of observing a particular position depends on what velocity you have:
 
-![Bilby Stampede](https://www.bzarg.com/wp-content/uploads/2015/08/gauss_3.png)
+<img src="https://www.bzarg.com/wp-content/uploads/2015/08/gauss_3.png" align="center" width="300",height="160">
+
 This kind of situation might arise if, for example, we are estimating a new position based on an old one. If our velocity was high, we probably moved farther, so our position will be more distant. If we’re moving slowly, we didn’t get as far.
 
 This kind of relationship is really important to keep track of, because it gives us more information: One measurement tells us something about what the others could be. And that’s the goal of the Kalman filter, we want to squeeze as much information from our uncertain measurements as we possibly can!
 
 This correlation is captured by something called a covariance matrix. In short, each element of the matrix Σij is the degree of correlation between the ith state variable and the jth state variable. (You might be able to guess that the covariance matrix is symmetric, which means that it doesn’t matter if you swap i and j). Covariance matrices are often labelled “Σ”, so we call their elements “Σij”.
 
-![Bilby Stampede](https://www.bzarg.com/wp-content/uploads/2015/08/gauss_2.png)
+<img src="https://www.bzarg.com/wp-content/uploads/2015/08/gauss_2.png" align="center" width="300",height="160">
 
 Rome was not built in one day,so does the way learn Kalman filter.
 Let us take a break and think about the following question:
 which one can be covariance matrix in Kalman filter:
+
 A:{[1,2];[3,4]} 
 B:{[1,0];[0,1]}
 
